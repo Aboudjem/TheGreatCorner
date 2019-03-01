@@ -1,25 +1,20 @@
 {
-  "name": "thegoodcorner",
+  "name": "TheGoodCorner",
   "version": "0.1.0",
   "private": true,
+  "devDependencies": {
+    "react-scripts": "0.7.0"
+  },
   "dependencies": {
-    "react": "^16.8.3",
-    "react-dom": "^16.8.3",
-    "react-scripts": "2.1.5"
+    "re-base": "2.3.0",
+    "react": "15.3.2",
+    "react-dom": "15.3.2",
+    "react-router": "4.0.0-alpha.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  }
 }
