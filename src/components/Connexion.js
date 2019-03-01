@@ -1,5 +1,5 @@
 import React from 'react';
-
+import logo from '../../public/img/logo.png';
 class Connexion extends React.Component {
 
 	goToApp = event => {
@@ -12,10 +12,11 @@ class Connexion extends React.Component {
 		return (
 			<div className="connexionBox">
 				<form className="connexion" onSubmit={(e) => this.goToApp(e)} >
+				<img src={logo}/>
 					<h1>My Ads</h1>
 					<input type="text" placeholder="Your name" pattern="[A-Za-z-]{1,}" required ref={(input) => {this.boxInput = input}} />
 					<button type="submit">GO</button>
-					<p>Pas de caractères spéciaux.</p>
+					<p>No special characters are allowed</p>
 				</form>
 			</div>
 		)
