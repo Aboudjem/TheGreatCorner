@@ -1,126 +1,144 @@
 import React from 'react';
-import '../index.css';
+import base from '../base';
 import AddAd from './AddAd';
-import Base from '../base';
 
 class Admin extends React.Component {
 
-    state = {
-        uid: null,
-        owner: null,
-    };
+	state = {
+		uid: null,
+		owner: null
+	};
 
-    componentDidMount(){
-        Base.onAuth(user => {
-            if (user) {
-                this.handleConnexion(null, {user})
-            }
-        })
-    }
+	componentDidMount() {
+		base.onAuth(user => {
+			if (user) {
+				this.handleConnexion(null, { user })
+			}
+		})
+	}
 
-    connexion = provider => {
-        Base.authWithOAuthPopup(provider, this.handleConnexion);
-    };
+	handleUpdate = (event, key) => {
+		const ad = this.props.ads[key];
+		const updateAd = {
+			...ad,
+			[event.target.name]: event.target.value
+		};
+		this.props.updateAd(key, updateAd);
+	};
 
-    disconnect = () => {
-        Base.unauth();
-        this.setState({uid: null});
-    };
+	connexion = (provider) => {
+		console.log(`Tentative de connexion avec ${provider}`);
+		base.authWithOAuthPopup(provider, this.handleConnexion);
+	};
 
-    handleConnexion = (err, authData) => {
-        if(err) {
-            console.log(err);
-            return;
-        }
-        const boxRef = Base.database().ref(this.props.login);
+	disconnect = () => {
+		base.unauth();
+		this.setState({ uid: null });
+	}
 
-        boxRef.once('value', snapshot => {
-            const data = snapshot.val() || {};
-            if(!data.owner) {
-                boxRef.set({
-                    owner: authData.user.uid
-                })
-            }
+	handleConnexion = (err, authData) => {
 
-            this.setState({
-                uid: authData.user.uid,
-                owner: data.owner || authData.user.uid
-            })
+		if (err) {
+			console.log(err);
+			return;
+		}
 
-        })
-    };
+		// récupérer le name de la boîte
+		const boxRef = base.database().ref(this.props.login);
 
+		// Demander à firebase les données
+		boxRef.once('value', (snapshot) => {
 
+			const data = snapshot.val() || {};
 
-    handleChange = (event, key) => {
-        const ad = this.props.ads[key];
-        const updatedAd = {
-            ...ad,
-            [event.target.name]: event.target.value
-        };
-      this.props.updateAds(key, updatedAd);
-    };
+			// Attribuer la box si elle n'est à personne
+			if(!data.owner) {
+				boxRef.set({
+					owner: authData.user.uid
+				})
+			}
 
-    renderLogin = () => {
-        return (
-            <div className="login">
-                <h2>Login using Facebook !</h2>
-                <button className="facebook-button" onClick={() => this.connexion('facebook')}> Connect with Facebook</button>
-            </div>
-        )
-    }
+			this.setState({
+				uid: authData.user.uid,
+				owner: data.owner || authData.user.uid
+			});
 
-    renderAdmin = key => {
-        const ad = this.props.ads[key];
-        return (
-            <div className="card" key={key}>
-                <form className="admin-form">
-                    <input ref={input => this.name = input} name="name" value={ad.name} type="text" placeholder="Ad's title" onChange={e => this.handleChange(e, key)} />
-                    <input ref={input => this.image = input} name="image" value={ad.image} type="text" placeholder="Image's url" onChange={e => this.handleChange(e, key)} />
-                    <textarea ref={input => this.specifications = input} name="specifications" value={ad.specifications} rows="3" placeholder="Details separated by commas" onChange={e => this.handleChange(e, key)} />
-                    <textarea ref={input => this.description = input} name="description" value={ad.description} rows="15" placeholder="One per line" onChange={e => this.handleChange(e, key)} />
-                </form>
-                <button onClick={() => this.props.deleteAds(key)}>Delete this ad</button>
-            </div>
-        )
-    };
-    render() {
-        const disconnect = <button onClick={this.disconnect}>Disconnect</button>;
-        if (!this.state.uid){
-            return <div>{this.renderLogin()}</div>
-        }
+		});
+	};
 
-        if (this.state.uid !== this.state.owner){
-            return (
-                <div className="login">
-                    {this.renderLogin()}
-                <p>You're not the owner of this page !</p>
-                </div>
-            );
-        }
+	renderLogin = () => {
+		return (
+				<div className="login">
+					<h2>Connecte toi pour créer tes ads !</h2>
+					<button className="facebook-button" onClick={() => this.connexion('facebook')} >Me connecter avec Facebook</button>
+					<button className="twitter-button" onClick={() => this.connexion('twitter')} >Me connecter avec Twitter</button>
+				</div>
+		)
+	};
 
-        const adminCards = Object
-            .keys(this.props.ads)
-            .map(this.renderAdmin);
-        return (
-            <div className="cards">
-                <AddAd addAds={this.props.addAds}/>
-                {adminCards}
-                <footer>
-                    <button onClick={ this.props.loadAds}>Fill</button>
-                    {disconnect}
-                </footer>
-            </div>
-        )
-    }
+	renderAdmin = (key) => {
+		const ad = this.props.ads[key];
+		return (
+			<div className="card" key={key} >
+				<form className="admin-form">
 
-    static propTypes = {
-        ads:        React.PropTypes.object.isRequired,
-        loadAds:    React.PropTypes.func.isRequired,
-        addAds:     React.PropTypes.func.isRequired,
-        updateAds:  React.PropTypes.func.isRequired,
-        deleteAds:  React.PropTypes.func.isRequired
-    };
+					<input type="text" name="name" placeholder="Nom de la ad" value={ad.name} onChange={(e) => this.handleUpdate(e, key)} />
+
+					<input type="text" name="image" placeholder="Adresse de l'image" value={ad.image} onChange={(e) => this.handleUpdate(e, key)} />
+
+					<textarea name="specifications" rows="3" placeholder="Liste des ingrédients" value={ad.specifications} onChange={(e) => this.handleUpdate(e, key)} ></textarea>
+
+					<textarea name="description" rows="15" placeholder="Liste des description" value={ad.description} onChange={(e) => this.handleUpdate(e, key)} ></textarea>
+
+				</form>
+				<button onClick={() => this.props.deleteAd(key)} >Delete</button>
+			</div>
+		)
+	};
+
+	render() {
+		const disconnect = <button onClick={this.disconnect} >Déconnexion!</button>
+
+		// Check si il existe un propriétaire
+		if (!this.state.uid) {
+			return <div>{this.renderLogin()}</div>
+		}
+
+		//Check c'est le propriétaire de la boîte
+		if (this.state.uid !== this.state.owner) {
+			return (
+				<div className="login">
+					{this.renderLogin()}
+					<p>⚠Tu n'es pas le propriétaire de cette boîte à ads.</p>
+				</div>
+			)
+		}
+
+		const adminCards = Object
+			.keys(this.props.ads)
+			.map(this.renderAdmin);
+
+		return (
+			<div className="cards">
+				<AddAd addAd={this.props.addAd} />
+				{adminCards}
+				<footer>
+					<button onClick={this.props.loadExemple} >Remplir</button>
+				{disconnect}
+				</footer>
+			</div>	
+		)
+	}
+
+	static propTypes = {
+		ads: React.PropTypes.object.isRequired,
+		loadExemple: React.PropTypes.func.isRequired,
+		addAd: React.PropTypes.func.isRequired,
+		updateAd: React.PropTypes.func.isRequired,
+		deleteAd: React.PropTypes.func.isRequired,
+		login: React.PropTypes.string.isRequired
+	};
+
 }
 
 export default Admin;

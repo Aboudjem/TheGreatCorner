@@ -1,16 +1,20 @@
 import React from 'react';
-import '../index.css';
-
+// import logo from '../../public/img/logo.png';
 class Header extends React.Component {
-    render() {
-        return (
-        <header>
-            <h1>
-                The Good Corner ! <strong> Welcome {this.props.login}</strong>
-            </h1>
-        </header>
-        )
-    }
+	render() {
+		return (
+			<div>
+			<header>
+				{/*<img className="logo" src={logo} alt="logo" />*/}
+				<h1>{this.props.login}'s corner</h1>
+			</header>
+			</div>
+		)
+	}
+
+	static propTypes = {
+	  login: React.PropTypes.string.isRequired
+	};
 }
 
 export default Header;

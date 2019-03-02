@@ -1,76 +1,81 @@
+// React
 import React from 'react';
-import Header from "./Header";
-import Admin from "./Admin";
-import ads from '../ads';
+//Components
+import Header from './Header';
+import Admin from './Admin';
 import Card from './Card';
+// Importer les ads
+import ads from '../ads';
+// Firebase
 import base from '../base';
 
 class App extends React.Component {
-    state = {
-        ads: {}
-    };
 
+	state = {
+		ads: {}
+	};
 
-    componentWillMount() {
-        this.ref = base.syncState(`${this.props.params.login}/ads`, {
-            context: this,
-            state: 'ads'
-        })
-    }
+	componentWillMount() {
+		this.ref = base.syncState(`${this.props.params.login}/ads`, {
+			context: this,
+			state: 'ads'
+		});
+	}
 
-    componentWillUnmount() {
-        base.removeBinding(this.ref);
-    }
+	componentWillUnmount() {
+	  base.removeBinding(this.ref);
+	}
 
-    loadAds = () => {
-        this.setState({ads});
-    };
+	loadExemple = () => {
+		this.setState({ ads });
+	};
 
-    addAds = (ad) => {
-        const ads = {...this.state.ads};
-        const timestamp = Date.now();
-        ads[`Ads-${timestamp}`] = ad;
-        this.setState({ads});
-    };
+	addAd = (ad) => {
+		const ads = {...this.state.ads};
+		const timestamp = Date.now();
+    ads[`ad-${timestamp}`] = ad;
+		this.setState({ ads });
+	};
 
-    updateAds = (key, updatedAd) => {
-        const ads = {...this.state.ads};
-        ads[key] = updatedAd;
-        this.setState({ads})
-    };
+	updateAd = (key, updateAd) => {
+		const ads = {...this.state.ads};
+		ads[key] = updateAd;
+		this.setState({ ads });
+	};
 
-    deleteAds = (key) => {
-        const ads = {...this.state.ads};
-        ads[key] = null;
-        this.setState({ads});
-    };
+	deleteAd = (key) => {
+		const ads = {...this.state.ads};
+		ads[key] = null;
+		this.setState({ ads });
+	};
 
-    render() {
+	render() {
 
-        const cards = Object
-            .keys(this.state.ads)
-            .map(key => <Card key={key} details={this.state.ads[key]}/>);
-        return (
-            <div className="box">
-                <Header login={this.props.params.login}/>
-                <h1>{this.props.params.login}</h1>
-                <div className="cards">
-                    {cards}
-                </div>
-                <Admin
-                    ads={this.state.ads}
-                    loadAds={this.loadAds}
-                    addAds={this.addAds}
-                    updateAds={this.updateAds}
-                    deleteAds={this.deleteAds}
-                />
-            </div>
-        )
-    }
+		const cards = Object
+			.keys(this.state.ads)
+			.map(key => <Card key={key} details={this.state.ads[key]} />);
 
-    static propTypes = {
-        params: React.PropTypes.object.isRequired
-    };
+		return (
+			<div className="box">
+				<Header login={this.props.params.login} />
+				<div className="cards">
+					{cards}
+				</div>
+				<Admin
+					ads={this.state.ads}
+					loadExemple={this.loadExemple}
+					addAd={this.addAd}
+					updateAd={this.updateAd}
+					deleteAd={this.deleteAd}
+					login={this.props.params.login}
+				/>
+			</div>
+		)
+	}
+
+	static propTypes = {
+	  params: React.PropTypes.object.isRequired
+	};
 }
 
 export default App;

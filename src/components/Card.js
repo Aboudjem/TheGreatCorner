@@ -2,36 +2,38 @@ import React from 'react';
 
 class Card extends React.Component {
 
-    render() {
-        const specifications = this.props.details.specifications.split(',').map((item, key) => <li key={key}>{item}</li>);
-        const description = this.props.details.description.split('\n').map((item, key) => <li key={key}>{item}</li>);
+	render() {
 
-        return (
-            <div className="card">
+		const specifications = this.props.details.specifications.split(',').map((item, key) => <li key={key}>{item}</li>);
 
-                <div className="image">
-                    <img src={this.props.details.image} alt="" />
-                </div>
+		const description = this.props.details.description.split('\n').map((item, key) => <li key={key}>{item}</li>);
 
-                <div className="ad">
+		return (
+			<div className="card">
 
-                    <h2>{this.props.details.name}</h2>
+				<div className="image">
+					<img src={this.props.details.image} alt="" />
+				</div>
 
-                    <ul className="liste-specifications">
-                        {specifications}
-                    </ul>
+				<div className="ad">
 
-                    <ol className="liste-instruction">
-                        {description}
-                    </ol>
-                </div>
-            </div>
-        )
-    }
+					<h2>{this.props.details.name}</h2>
 
-    static propTypes = {
-        details: React.PropTypes.object.isRequired
-    };
+					<ul className="list-specifications">
+						{specifications}
+					</ul>
+
+					<ul className="list-description">
+						{description}
+					</ul>
+				</div>
+			</div>
+		)
+	}
+
+	static propTypes = {
+	  details: React.PropTypes.object.isRequired
+	};
 }
 
 export default Card;
