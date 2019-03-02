@@ -1,4 +1,36 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# TheGreatCorner
+
+TheGreatCorner is a LeBonCoin-like using React <img src="https://github.com/Aboudjem/chatBox/blob/master/public/img/react.png" width="20" /> and Firebase <img src="https://github.com/Aboudjem/chatBox/blob/master/public/img/firebase.png" width="20" /> to create a "Corner" with all your added ads, you can authenticate with Facebook <img src="https://github.com/Aboudjem/TheGreatCorner/blob/master/public/img/fb.png" width="20" /> or Twitter <img src="https://github.com/Aboudjem/TheGreatCorner/blob/master/public/img/twitter.png" width="20" /> in order to Add, Modify or Delete an Ad.
+
+
+## Installation
+
+Use the package manager [npm](https://www.npmjs.com/) to install chatBox.
+
+```bash
+npm install
+```
+
+## Modules
+
+```javascript
+     - marked
+     - re-base
+     - react-addons-css-transition-group,
+     - react-router
+```
+
+## Usage
+- Enter the username for which you want to see the page
+- You can authenticate to access to the admin panel ( You need to be the owner of the page)
+- On admin panel you can publish new ad, or modify/delete the existing ones
+
+## Example
+
+#### Access
+![Image of Access|250x250](https://github.com/Aboudjem/TheGreatCorner/blob/master/public/img/TGC1.gif)
+#### Login / Admin Panel
+![Image of login and Admin Panel|250x250](https://github.com/Aboudjem/TheGreatCorner/blob/master/public/img/TGC2.gif)
 
 ## Available Scripts
 
@@ -25,44 +57,5 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
