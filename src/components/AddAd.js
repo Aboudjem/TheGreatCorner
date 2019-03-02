@@ -24,15 +24,15 @@ class AddAd extends React.Component {
 					onSubmit={(e) => this.addAd(e)}
 				>
 
-					<input ref={input => this.name = input} type="text" placeholder="Nom de la ad" />
+					<input ref={input => this.name = input} type="text" placeholder="Ad title" />
 
-					<input ref={input => this.image = input} type="text" placeholder="Adresse de l'image" />
+					<input ref={input => this.image = input} type="text" placeholder="Image's link" />
 
-					<textarea ref={input => this.specifications = input} rows="3" placeholder="Liste des ingrédients séparés par une virgule" ></textarea>
+					<textarea ref={input => this.specifications = input} rows="3" placeholder="Specifications (Commas separated)" ></textarea>
 
-					<textarea ref={input => this.description = input} rows="15" placeholder="Liste des description (une par ligne)" ></textarea>
+					<textarea ref={input => this.description = input} rows="15" placeholder="Description (One per line)" ></textarea>
 
-					<button type="submit">+ Ajouter une ad</button>
+					<button type="submit">+ Publish this ad</button>
 				</form>
 			</div>
 		)

@@ -14,7 +14,7 @@ class Connexion extends React.Component {
 			<div className="connexionBox">
 				<form className="connexion" onSubmit={(e) => this.goToApp(e)} >
 					<img src={logo} alt="logo"/>
-					<h1>The Good Corner !</h1>
+					<h1>The Great Corner !</h1>
 					<input type="text" placeholder="Type Name" pattern="[A-Za-z-]{1,}" required ref={(input) => {this.boxInput = input}} />
 					<button type="submit">GO</button>
 					<p>No special characters allowed.</p>
