@@ -42,16 +42,10 @@ class Admin extends React.Component {
 			console.log(err);
 			return;
 		}
-
-		// récupérer le name de la boîte
 		const boxRef = base.database().ref(this.props.login);
-
-		// Demander à firebase les données
 		boxRef.once('value', (snapshot) => {
 
 			const data = snapshot.val() || {};
-
-			// Attribuer la box si elle n'est à personne
 			if(!data.owner) {
 				boxRef.set({
 					owner: authData.user.uid
@@ -69,9 +63,9 @@ class Admin extends React.Component {
 	renderLogin = () => {
 		return (
 				<div className="login">
-					<h2>Connecte toi pour créer tes ads !</h2>
-					<button className="facebook-button" onClick={() => this.connexion('facebook')} >Me connecter avec Facebook</button>
-					<button className="twitter-button" onClick={() => this.connexion('twitter')} >Me connecter avec Twitter</button>
+					<h2>Connect to publish your own ads !</h2>
+					<button className="facebook-button" onClick={() => this.connexion('facebook')} >Connect with Facebook</button>
+					<button className="twitter-button" onClick={() => this.connexion('twitter')} >Connect with Twitter</button>
 				</div>
 		)
 	};
@@ -82,13 +76,13 @@ class Admin extends React.Component {
 			<div className="card" key={key} >
 				<form className="admin-form">
 
-					<input type="text" name="name" placeholder="Nom de la ad" value={ad.name} onChange={(e) => this.handleUpdate(e, key)} />
+					<input type="text" name="name" placeholder="Name of the ad" value={ad.name} onChange={(e) => this.handleUpdate(e, key)} />
 
-					<input type="text" name="image" placeholder="Adresse de l'image" value={ad.image} onChange={(e) => this.handleUpdate(e, key)} />
+					<input type="text" name="image" placeholder="Img address" value={ad.image} onChange={(e) => this.handleUpdate(e, key)} />
 
-					<textarea name="specifications" rows="3" placeholder="Liste des ingrédients" value={ad.specifications} onChange={(e) => this.handleUpdate(e, key)} ></textarea>
+					<textarea name="specifications" rows="3" placeholder="List of specifications (comma separated)" value={ad.specifications} onChange={(e) => this.handleUpdate(e, key)} ></textarea>
 
-					<textarea name="description" rows="15" placeholder="Liste des description" value={ad.description} onChange={(e) => this.handleUpdate(e, key)} ></textarea>
+					<textarea name="description" rows="15" placeholder="Description" value={ad.description} onChange={(e) => this.handleUpdate(e, key)} ></textarea>
 
 				</form>
 				<button onClick={() => this.props.deleteAd(key)} >Delete</button>
@@ -97,19 +91,15 @@ class Admin extends React.Component {
 	};
 
 	render() {
-		const disconnect = <button onClick={this.disconnect} >Déconnexion!</button>
-
-		// Check si il existe un propriétaire
+		const disconnect = <button onClick={this.disconnect} >Disconnect!</button>
 		if (!this.state.uid) {
 			return <div>{this.renderLogin()}</div>
 		}
-
-		//Check c'est le propriétaire de la boîte
 		if (this.state.uid !== this.state.owner) {
 			return (
 				<div className="login">
 					{this.renderLogin()}
-					<p>⚠Tu n'es pas le propriétaire de cette boîte à ads.</p>
+					<p>⚠You're not the owner of this page.</p>
 				</div>
 			)
 		}
@@ -123,7 +113,7 @@ class Admin extends React.Component {
 				<AddAd addAd={this.props.addAd} />
 				{adminCards}
 				<footer>
-					<button onClick={this.props.loadExemple} >Remplir</button>
+					<button onClick={this.props.loadExemple} >Fill with examples</button>
 				{disconnect}
 				</footer>
 			</div>	
