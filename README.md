@@ -1,6 +1,6 @@
 # TheGreatCorner
 
-TheGreatCorner is a LeBonCoin-like using React <img src="https://github.com/Aboudjem/chatBox/blob/master/public/img/react.png" width="20" /> and Firebase <img src="https://github.com/Aboudjem/chatBox/blob/master/public/img/firebase.png" width="20" /> to create a "Corner" with all your added ads, you can authenticate with Facebook <img src="https://github.com/Aboudjem/TheGreatCorner/blob/master/public/img/fb.png" width="20" /> or Twitter <img src="https://github.com/Aboudjem/TheGreatCorner/blob/master/public/img/twitter.png" width="20" /> in order to Add, Modify or Delete an Ad.
+TheGreatCorner is a LeBonCoin-like using React <img src="https://github.com/Aboudjem/chatBox/blob/master/public/img/react.png" width="20" /> and Firebase <img src="https://github.com/Aboudjem/chatBox/blob/master/public/img/firebase.png" width="20" /> to create a "Corner" with all your published ads, you can authenticate with Facebook <img src="https://github.com/Aboudjem/TheGreatCorner/blob/master/public/img/fb.png" width="20" /> or Twitter <img src="https://github.com/Aboudjem/TheGreatCorner/blob/master/public/img/twitter.png" width="20" /> in order to Add, Modify or Delete an Ad.
 
 
 ## Installation
